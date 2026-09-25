@@ -59,41 +59,40 @@ static uint32_t start_tick_us = 0;
 static uint32_t fps = 0;
 
 const int8_t g_settings_visibility_o2em[MOPT_COUNT] = {
-    0,                               // Exit Game, or back to menu. Always visible when in-game.
-    0,                               // Reset Game
-    BOOTLOADER_BUILD,                // Return to emuLoader picker (only when built for the loader)
-    0,                               // Save / Restore State
-    1,                               // Screen Mode
-    0,                               // Scanlines toggle (superseded by Screen Mode)
-    HSTX,                            // Scanline Type (HSTX only)
-    1,                               // FPS Overlay
-    0,                               // Audio Enable
-    0,                               // Frame Skip
-    HSTX && ENABLEDVI,                            // Display Mode (HDMI or DVI, only when HSTX is enabled, because non-HSTX builds always use HDMI)
-    (EXT_AUDIO_IS_ENABLED ), // External Audio
-    1,                               // Font Color
-    1,                               // Font Back Color
-    ENABLE_VU_METER,                 // VU Meter
-    //(HW_CONFIG == 8),                // Fruit Jam Internal Speaker
-    (HW_CONFIG == 8),                // Fruit Jam Volume Control
-    0,                               // DMG Palette (NES emulator does not use GameBoy palettes)
-    0,                               // Border Mode (Super Gameboy style borders not applicable for NES)
-    0,                               // Rapid Fire on A
-    0,                               // Rapid Fire on B
-    0,                               // Auto Insert Disk A, enabled at runtime on RP2350
-    0,                               // Auto Swap FDS, enabled at runtime on RP2350
-    0,                               // FDS Disk Swap (toggled on after fdsParse succeeds)
-    0,                               // Overclock (CPU high clock toggle)
-    0,                               // YM Audio (SMS Only)
-    1,                               // Enter bootsel mode
-    1,                               // Controller Test
-    0,                               // Recent Games (menu.cpp force-shows this in the rom browser)
-    0,                               // USB Drive Mode (menu.cpp force-shows this in the rom browser)
-    0,                               // Cassette (TI-99/4A only)
-    0,                               // Disk (TI-99/4A only)
-    0,                               // Serial keyboard (TI-99/4A only)
-    0,                               // Sprite Limit (NES only)
-    0,                               // Overscan in menu (menu.cpp force-shows this below the menu colors)
+    [MOPT_EXIT_GAME]               = 0,                    // Exit Game, or back to menu. Always visible when in-game.
+    [MOPT_RESET_GAME]              = 0,                    // Reset Game
+    [MOPT_REBOOT_TO_LOADER]        = BOOTLOADER_BUILD,     // Return to emuLoader picker (only when built for the loader)
+    [MOPT_SAVE_RESTORE_STATE]      = 0,                    // Save / Restore State
+    [MOPT_SCREENMODE]              = 1,                    // Screen Mode
+    [MOPT_SCANLINES]               = 0,                    // Scanlines toggle (superseded by Screen Mode)
+    [MOPT_SCANLINE_TYPE]           = HSTX,                 // Scanline Type (HSTX only)
+    [MOPT_FPS_OVERLAY]             = 1,                    // FPS Overlay
+    [MOPT_AUDIO_ENABLE]            = 0,                    // Audio Enable
+    [MOPT_FRAMESKIP]               = 0,                    // Frame Skip
+    [MOPT_DISPLAY_MODE]            = HSTX && ENABLEDVI,    // Display Mode (HDMI or DVI, only when HSTX is enabled, because non-HSTX builds always use HDMI)
+    [MOPT_EXTERNAL_AUDIO]          = EXT_AUDIO_IS_ENABLED, // External Audio
+    [MOPT_FONT_COLOR]              = 1,                    // Font Color
+    [MOPT_FONT_BACK_COLOR]         = 1,                    // Font Back Color
+    [MOPT_FRUITJAM_VUMETER]        = ENABLE_VU_METER,      // VU Meter
+    [MOPT_FRUITJAM_VOLUME_CONTROL] = (HW_CONFIG == 8),     // Fruit Jam Volume Control
+    [MOPT_DMG_PALETTE]             = 0,                    // DMG Palette (NES emulator does not use GameBoy palettes)
+    [MOPT_BORDER_MODE]             = 0,                    // Border Mode (Super Gameboy style borders not applicable for NES)
+    [MOPT_RAPID_FIRE_ON_A]         = 0,                    // Rapid Fire on A
+    [MOPT_RAPID_FIRE_ON_B]         = 0,                    // Rapid Fire on B
+    [MOPT_AUTO_INSERT_FDS_DISK_A]  = 0,                    // Auto Insert Disk A, enabled at runtime on RP2350
+    [MOPT_AUTO_SWAP_FDS_DISK]      = 0,                    // Auto Swap FDS, enabled at runtime on RP2350
+    [MOPT_FDS_DISK_SWAP]           = 0,                    // FDS Disk Swap (toggled on after fdsParse succeeds)
+    [MOPT_OVERCLOCK]               = 0,                    // Overclock (CPU high clock toggle)
+    [MOPT_FM_AUDIO]                = 0,                    // YM Audio (SMS Only)
+    [MOPT_ENTER_BOOTSEL_MODE]      = 1,                    // Enter bootsel mode
+    [MOPT_CONTROLLER_TEST]         = 1,                    // Controller Test
+    [MOPT_RECENT_GAMES]            = 0,                    // Recent Games (menu.cpp force-shows this in the rom browser)
+    [MOPT_USB_DRIVE_MODE]          = 0,                    // USB Drive Mode (menu.cpp force-shows this in the rom browser)
+    [MOPT_CASSETTE]                = 0,                    // Cassette (TI-99/4A only)
+    [MOPT_DISK]                    = 0,                    // Disk (TI-99/4A only)
+    [MOPT_SERIAL_KEYBOARD]         = 0,                    // Serial keyboard (TI-99/4A only)
+    [MOPT_SPRITE_LIMIT]            = 0,                    // Sprite Limit (NES only)
+    [MOPT_MENU_OVERSCAN]           = 0,                    // Overscan in menu (menu.cpp force-shows this below the menu colors)
 };
 
 const uint8_t g_available_screen_modes_o2em[] = {
