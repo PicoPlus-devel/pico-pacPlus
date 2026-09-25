@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**pico-pacPlus** is an Odyssey 2 / VideoPac (G7000) emulator for RP2040- and RP2350-based microcontrollers. It is based on the [O2EM](https://sourceforge.net/projects/o2em/) emulator core by Daniel Boris and Andre de la Rocha and the [O2EM2](https://music.mzis.net/bin/o2em2/) enhancements by LABBE Corentin, integrated with the video, audio, menu, and SD card framework from [pico-infonesPlus](https://github.com/fhoedemakers/pico-infonesPlus).
+**pico-pacPlus** is an Odyssey 2 / VideoPac (G7000) emulator for RP2040- and RP2350-based microcontrollers. It is based on the [O2EM](https://sourceforge.net/projects/o2em/) emulator core by Daniel Boris and Andre de la Rocha and the [O2EM2](https://music.mzis.net/bin/o2em2/) enhancements by LABBE Corentin, integrated with the video, audio, menu, and SD card framework from [pico-infonesPlus](https://github.com/PicoPlus-devel/pico-infonesPlus).
 
 | | |
 |-----|-----|
@@ -13,12 +13,12 @@
 
 This project is part of a family of Raspberry Pi Pico emulator projects:
 
-- NES: [pico-infonesPlus](https://github.com/fhoedemakers/pico-infonesPlus)
-- Sega Master System / Game Gear: [pico-smsplus](https://github.com/fhoedemakers/pico-smsplus)
-- Game Boy / Game Boy Color: [pico-peanutGB](https://github.com/fhoedemakers/pico-peanutGB)
-- Sega Mega Drive / Genesis: [pico-genesisPlus](https://github.com/fhoedemakers/pico-genesisPlus)
-- PC Engine / TurboGrafx-16: [pico-pcePlus](https://github.com/fhoedemakers/pico-pcePlus)
-- Multi-emulator bundle for the [Adafruit Fruit Jam](https://www.adafruit.com/product/6200): [retroJam](https://github.com/fhoedemakers/retroJam)
+- NES: [pico-infonesPlus](https://github.com/PicoPlus-devel/pico-infonesPlus)
+- Sega Master System / Game Gear: [pico-smsplus](https://github.com/PicoPlus-devel/pico-smsplus)
+- Game Boy / Game Boy Color: [pico-peanutGB](https://github.com/PicoPlus-devel/pico-peanutGB)
+- Sega Mega Drive / Genesis: [pico-genesisPlus](https://github.com/PicoPlus-devel/pico-genesisPlus)
+- PC Engine / TurboGrafx-16: [pico-pcePlus](https://github.com/PicoPlus-devel/pico-pcePlus)
+- Multi-emulator bundle for the [Adafruit Fruit Jam](https://www.adafruit.com/product/6200): [retroJam](https://github.com/PicoPlus-devel/retroJam)
 
 ***
 
@@ -48,7 +48,7 @@ The emulator runs on both RP2040 and RP2350 boards:
 - **RP2040 boards (Pico 1 / Pico W / Waveshare RP2040 boards / etc.)** — Fully supported. Because there is no PSRAM, the selected ROM is first written to flash on launch, which triggers a reboot; startup takes a few seconds. Some titles exhibit minor visual glitches.
 - **RP2350 boards (Pico 2 / Pico 2 W / Waveshare RP2350 boards / Adafruit Metro RP2350 / Adafruit Fruit Jam / etc.)** — Recommended. On boards equipped with PSRAM the ROM is loaded straight into PSRAM and started immediately, without the reboot-and-write step.
 
-For board-by-board wiring, supported display modes, PCB designs, 3D-printed cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/fhoedemakers/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects — only the firmware (`.uf2` file) differs.
+For board-by-board wiring, supported display modes, PCB designs, 3D-printed cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects — only the firmware (`.uf2` file) differs.
 
 ### PSRAM
 
@@ -81,7 +81,7 @@ The emulator requires the Odyssey 2 BIOS to run. The BIOS is not distributed wit
 
 The emulator can display box art and a short text description for each ROM when a metadata pack is present on the SD card. With the pack installed, pressing **START** on a ROM in the file browser displays its metadata; the screensaver also shows random box art.
 
-A metadata pack can be downloaded from the [releases page](https://github.com/fhoedemakers/pico-pacPlus/releases) and extracted to the root of the SD card. It is installed under:
+A metadata pack can be downloaded from the [releases page](https://github.com/PicoPlus-devel/pico-pacPlus/releases) and extracted to the root of the SD card. It is installed under:
 
 ```
 /metadata/O2E/
@@ -129,7 +129,9 @@ Gamepad:
 - **Button1**: back to parent folder
 - **Button3**: open the [recently played list](#recently-played-games)
 - **START**: show [metadata](#metadata) and box art (when available)
-- **SELECT**: open the settings menu (screen mode, scanlines, framerate display, menu colors, board-specific settings)
+- **SELECT**: open the settings menu (screen mode, scanlines, framerate display, menu colors, the overscan fix for the menus, [USB drive mode](#usb-drive-mode), board-specific settings)
+
+**Overscan fix in menu** is meant for TVs that cut off the edges of the picture: **Rows** leaves the top and bottom text rows of the menus blank, **Rows & columns** also leaves the first and last columns blank. The effect is shown while the setting is changed, and it applies to the menus only, not to the game picture. The color palette is shown only while one of the two menu color entries is selected, which leaves room for more entries on one page. In the settings menu, press SELECT on any setting to jump straight to the SAVE/CANCEL/DEFAULT row. Changes are only applied when **SAVE** is selected.
 
 USB keyboard:
 
@@ -166,6 +168,28 @@ If a game was moved, renamed or deleted on the SD card in the meantime, the list
 > [!NOTE]
 > On boards without PSRAM, starting a game from the list still writes to flash and reboots, exactly as starting it from the file browser does. Nothing is cached between launches. See [PSRAM](#psram).
 
+### USB drive mode
+
+USB drive mode presents the SD card to a computer as a USB mass storage device, so games can be added or removed without taking the card out of the console. Connect the console to the computer, open the settings menu with SELECT from the menu and choose **USB drive mode**. The card appears on the computer as a removable drive.
+
+The entry is only offered when the settings menu is opened from the menu. It is not available while a game is running: the running game holds its save files open and its rom is mapped out of flash, and letting the computer rewrite the card underneath that would corrupt both.
+
+When you are finished, eject the drive on the computer. The console notices this and leaves USB drive mode by itself. Pressing Button1 on the console leaves as well, for when no computer is attached. If no computer connects within 20 seconds, the console leaves USB drive mode by itself. The rom list is re-read on the way out, so files added from the computer appear without having to restart.
+
+> [!NOTE]
+> Transfers are slow. The console is a USB full-speed device and reaches the card a sector at a time over SPI, so copying is far slower than reading the card in a card reader. USB drive mode is meant for adding or replacing a few games. For filling a card, or for copying a large amount of data, take the card out and use a card reader.
+
+Behaviour depends on where controllers are connected on your board.
+
+| Board | Behaviour |
+| ----- | --------- |
+| Controllers on a separate USB port (boards built with PIO USB, such as the Fruit Jam) | The console's own USB port is free, so controllers keep working and the screen stays on. The menu returns to the rom list when you are done. |
+| Controllers on the console's own USB port | That port is the one connected to the computer, so a USB controller cannot be used while the card is mounted. Press Button1 on a controller in the NES controller port, or eject the drive on the computer. The console restarts afterwards. |
+| RP2040 boards | As above, and the screen is switched off for as long as the card is mounted. These boards cannot drive the video output while the computer is reading the card. The menu explains this first and lets you go back without mounting anything. |
+
+> [!CAUTION]
+> Eject the drive on the computer rather than pressing Button1. Ejecting makes the computer write out anything it still had cached, and the console leaves USB drive mode on its own once it has. Pressing Button1 while the computer still has the drive open can leave files on the card incomplete.
+
 ### In game
 
 Gamepad:
@@ -192,7 +216,7 @@ USB keyboard in-game:
 
 ## Running under pico-bootLoader
 
-Instead of flashing this emulator as the only application on your board, you can install it under [pico-bootLoader](https://github.com/fhoedemakers/pico-bootLoader). The bootloader turns an RP2350 board into a multi-system console: on power-on it shows a menu from which you pick an emulator or game, which is then launched straight from the SD card. Any reset or power cycle brings you back to that menu, so you no longer have to reconnect the board to a computer to switch systems.
+Instead of flashing this emulator as the only application on your board, you can install it under [pico-bootLoader](https://github.com/PicoPlus-devel/pico-bootLoader). The bootloader turns an RP2350 board into a multi-system console: on power-on it shows a menu from which you pick an emulator or game, which is then launched straight from the SD card. Any reset or power cycle brings you back to that menu, so you no longer have to reconnect the board to a computer to switch systems.
 
 Alongside pico-pacPlus, the bootloader can run the NES, SNES, Game Boy / Game Boy Color, Sega Master System / Game Gear, Sega Mega Drive / Genesis and PC Engine emulators, plus native *Doom* and *Duke Nukem 3D* ports.
 
@@ -226,7 +250,7 @@ If you do want to build the emulator for the bootloader yourself, use the `-b` f
 ### Clone and build
 
 ```bash
-git clone --recurse-submodules https://github.com/fhoedemakers/pico-pacPlus.git
+git clone --recurse-submodules https://github.com/PicoPlus-devel/pico-pacPlus.git
 cd pico-pacPlus
 chmod +x pico_shared/bld.sh buildAll.sh
 ```
@@ -296,7 +320,7 @@ When using Visual Studio Code, choose the Release or the RelWithDebInfo build va
 
 - [O2EM](https://sourceforge.net/projects/o2em/) — original Odyssey 2 emulator by [Daniel Boris](https://sourceforge.net/projects/o2em/), continued by [Andre de la Rocha](https://sourceforge.net/projects/o2em/).
 - [O2EM2](https://music.mzis.net/bin/o2em2/) — enhanced O2EM fork by [LABBE Corentin](https://music.mzis.net/).
-- [pico-infonesPlus](https://github.com/fhoedemakers/pico-infonesPlus) — shared video, audio, menu, and SD card infrastructure, by Frank Hoedemakers.
+- [pico-infonesPlus](https://github.com/PicoPlus-devel/pico-infonesPlus) — shared video, audio, menu, and SD card infrastructure, by Frank Hoedemakers.
 - Pico port, SD card support, menu system, and platform integration by [@frenskefrens](https://github.com/fhoedemakers).
 
 ### Video and display

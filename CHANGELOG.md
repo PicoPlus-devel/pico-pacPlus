@@ -11,7 +11,7 @@ Release notes are below, newest first. [Binaries for every board configuration a
 3. Pick the `.uf2` for your board from the [table at the bottom of this page](#downloads___), hold **BOOTSEL** while connecting the board over USB, and copy the file to the drive that appears. The board reboots into the emulator by itself.
 4. Optionally extract the [metadata pack](#downloads___) to the root of the card for box art and descriptions.
 
-[Full setup instructions are in the readme](https://github.com/fhoedemakers/pico-pacPlus#setup-overview). For board-by-board wiring, display modes, PCB designs and 3D-printable cases, see the [pico-infonesPlus documentation](https://github.com/fhoedemakers/pico-infonesPlus#setup) — the supported boards and their pinouts are identical between the two projects, only the firmware differs.
+[Full setup instructions are in the readme](https://github.com/PicoPlus-devel/pico-pacPlus#setup-overview). For board-by-board wiring, display modes, PCB designs and 3D-printable cases, see the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup) — the supported boards and their pinouts are identical between the two projects, only the firmware differs.
 
 > [!IMPORTANT]
 > Both RP2040 (Pico 1) and RP2350 (Pico 2 and variants) boards are supported. RP2350 is recommended: a few games show minor visual glitches on RP2040.
@@ -19,6 +19,19 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > [!NOTE]
 > Upgrading from an earlier version only means flashing the new `.uf2`. The settings file on the SD card is unchanged, so your screen mode, colours and other preferences carry over.
 
+
+# v0.5
+
+## What's new
+
+- **USB drive mode.** The SD card can be shown on a computer as a USB drive, so games can be added or removed without taking the card out. Choose **USB drive mode** in the settings menu, opened from the menu (not during a game). Eject the drive on the computer when finished. On boards where controllers share the USB port with the computer, use a controller on the NES port. On RP2040 boards the screen stays off while the card is mounted and the console restarts afterwards. See [USB drive mode](https://github.com/PicoPlus-devel/pico-pacPlus#usb-drive-mode).
+- **Overscan fix in menu.** A new setting for TVs that cut off the edges of the screen. It leaves the top and bottom rows of the menus blank, and optionally the first and last columns as well. The change is shown right away in the settings menu.
+- **More options on one page in the settings menu.** The color palette is now only shown while one of the menu color options is selected, which leaves room for more options on screen.
+- **Quicker saving in the settings menu.** Press SELECT on any setting to jump straight to the SAVE/CANCEL/DEFAULT row.
+
+## Fixes
+
+- **Controller test screen** shows the controller outline and the list of controllers correctly again.
 
 # v0.4
 
@@ -40,7 +53,7 @@ The menu now keeps a list of the **last 20 games you started**, newest first. Op
 
 In the list, **A** starts the highlighted game, **SELECT** removes it from the list, **START** shows its box art, and **B** closes the list. The settings menu only offers the entry when it is opened from the ROM browser, not from inside a running game.
 
-The list is plain text in `/recent_O2E.txt` in the SD card root, one line per game, so it survives a reboot and can be edited or deleted on a PC. A game that is no longer on the card is reported as missing when you try to start it and can be dropped with SELECT. A damaged or unreadable list simply comes up empty — unlike the settings file, nothing gets reset. Each emulator installed under [pico-bootLoader](https://github.com/fhoedemakers/pico-bootLoader) keeps its own list.
+The list is plain text in `/recent_O2E.txt` in the SD card root, one line per game, so it survives a reboot and can be edited or deleted on a PC. A game that is no longer on the card is reported as missing when you try to start it and can be dropped with SELECT. A damaged or unreadable list simply comes up empty — unlike the settings file, nothing gets reset. Each emulator installed under [pico-bootLoader](https://github.com/PicoPlus-devel/pico-bootLoader) keeps its own list.
 
 **SNES controllers on a NES controller port use A and B**
 
@@ -126,7 +139,7 @@ Extra buttons on the DualShock 4 / DualSense, PlayStation Classic, Retro-bit Meg
 
 ## Playing several emulators on one board
 
-pico-pacPlus can also run as part of [pico-bootLoader](https://github.com/fhoedemakers/pico-bootLoader), which keeps several emulators — and a version of Doom — on a single RP2350 board and shows a menu at power-on to choose between them. From the settings menu you can return to that menu without touching the board. Those images are released together with pico-bootLoader; the downloads at the bottom of this page are the normal standalone versions.
+pico-pacPlus can also run as part of [pico-bootLoader](https://github.com/PicoPlus-devel/pico-bootLoader), which keeps several emulators — and a version of Doom — on a single RP2350 board and shows a menu at power-on to choose between them. From the settings menu you can return to that menu without touching the board. Those images are released together with pico-bootLoader; the downloads at the bottom of this page are the normal standalone versions.
 
 The layout used for these combined installations changed in this release, so a bootable pico-pacPlus image and pico-bootLoader itself have to come from the same generation — do not mix a v0.1 image with a newer loader or the other way around. Building such an image also works again with the latest version of picotool.
 
@@ -194,17 +207,17 @@ The Pico port of the O2EM emulator core and general code optimizations were deve
 <a name="downloads___"></a>
 ## Downloads by configuration
 
-Binaries for each configuration are listed below. For board-by-board wiring, supported display modes, PCB designs, 3D-printable cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/fhoedemakers/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects.
+Binaries for each configuration are listed below. For board-by-board wiring, supported display modes, PCB designs, 3D-printable cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects.
 
 ### Standalone boards
 
 | Board | Binary |
 |:--|:--|
-| Adafruit Metro RP2350 | [picoPacPlus_AdafruitMetroRP2350_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitMetroRP2350_arm.uf2) |
-| Adafruit Fruit Jam | [picoPacPlus_AdafruitFruitJam_arm_piousb.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitFruitJam_arm_piousb.uf2) |
-| Waveshare RP2350-PiZero | [picoPacPlus_WaveShareRP2350PiZero_arm_piousb.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2350PiZero_arm_piousb.uf2) |
-| Adafruit Feather RP2040 DVI | [picoPacPlus_AdafruitFeatherDVI_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitFeatherDVI_arm.uf2) |
-| Waveshare RP2040-PiZero | [picoPacPlus_WaveShareRP2040PiZero_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2040PiZero_arm.uf2) |
+| Adafruit Metro RP2350 | [picoPacPlus_AdafruitMetroRP2350_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitMetroRP2350_arm.uf2) |
+| Adafruit Fruit Jam | [picoPacPlus_AdafruitFruitJam_arm_piousb.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitFruitJam_arm_piousb.uf2) |
+| Waveshare RP2350-PiZero | [picoPacPlus_WaveShareRP2350PiZero_arm_piousb.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2350PiZero_arm_piousb.uf2) |
+| Adafruit Feather RP2040 DVI | [picoPacPlus_AdafruitFeatherDVI_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitFeatherDVI_arm.uf2) |
+| Waveshare RP2040-PiZero | [picoPacPlus_WaveShareRP2040PiZero_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2040PiZero_arm.uf2) |
 
 ### Breadboard / Custom PCB
 
@@ -212,27 +225,27 @@ Adafruit DVI Breakout + MicroSD card breakout, or the custom PCB.
 
 | Board | Binary |
 |:--|:--|
-| Pico | [picoPacPlus_AdafruitDVISD_pico_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico_arm.uf2) |
-| Pico W | [picoPacPlus_AdafruitDVISD_pico_w_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico_w_arm.uf2) |
-| Pico 2 / Pimoroni Pico Plus 2 | [picoPacPlus_AdafruitDVISD_pico2_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico2_arm.uf2) |
+| Pico | [picoPacPlus_AdafruitDVISD_pico_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico_arm.uf2) |
+| Pico W | [picoPacPlus_AdafruitDVISD_pico_w_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico_w_arm.uf2) |
+| Pico 2 / Pimoroni Pico Plus 2 | [picoPacPlus_AdafruitDVISD_pico2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_AdafruitDVISD_pico2_arm.uf2) |
 
 ### PCB Waveshare RP2040-Zero / RP2350-Zero (PCB required)
 
 | Board | Binary |
 |:--|:--|
-| Waveshare RP2040-Zero | [picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2) |
-| Waveshare RP2350-Zero | [picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2) |
+| Waveshare RP2040-Zero | [picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2040ZeroWithPCB_arm.uf2) |
+| Waveshare RP2350-Zero | [picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShareRP2350ZeroWithPCB_arm.uf2) |
 
 ### PCB Waveshare RP2350-USBA (PCB required)
 
-[Binary](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShare2350USBA_arm_piousb.uf2)
+[Binary](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_WaveShare2350USBA_arm_piousb.uf2)
 
 ### Pimoroni Pico DV Demo Base
 
 | Board | Binary |
 |:--|:--|
-| Pico | [picoPacPlus_PimoroniDVI_pico_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_PimoroniDVI_pico_arm.uf2) |
-| Pico 2 / Pimoroni Pico Plus 2 | [picoPacPlus_PimoroniDVI_pico2_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_PimoroniDVI_pico2_arm.uf2) |
+| Pico | [picoPacPlus_PimoroniDVI_pico_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_PimoroniDVI_pico_arm.uf2) |
+| Pico 2 / Pimoroni Pico Plus 2 | [picoPacPlus_PimoroniDVI_pico2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_PimoroniDVI_pico2_arm.uf2) |
 
 ### SpotPear HDMI
 
@@ -240,8 +253,8 @@ For more info about the SpotPear HDMI see https://spotpear.com/index/product/det
 
 | Board | Binary |
 |:--|:--|
-| Pico | [picoPacPlus_SpotpearHDMI_pico_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_SpotpearHDMI_pico_arm.uf2) |
-| Pico 2 / Pico 2 W | [picoPacPlus_SpotpearHDMI_pico2_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_SpotpearHDMI_pico2_arm.uf2) |
+| Pico | [picoPacPlus_SpotpearHDMI_pico_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_SpotpearHDMI_pico_arm.uf2) |
+| Pico 2 / Pico 2 W | [picoPacPlus_SpotpearHDMI_pico2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_SpotpearHDMI_pico2_arm.uf2) |
 
 ### Murmulator M1
 
@@ -249,8 +262,8 @@ For more info about the Murmulator see https://murmulator.ru/.
 
 | Board | Binary |
 |:--|:--|
-| Pico | [picoPacPlus_MurmulatorM1_pico_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM1_pico_arm.uf2) |
-| Pico 2 / Pico 2 W | [picoPacPlus_MurmulatorM1_pico2_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM1_pico2_arm.uf2) |
+| Pico | [picoPacPlus_MurmulatorM1_pico_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM1_pico_arm.uf2) |
+| Pico 2 / Pico 2 W | [picoPacPlus_MurmulatorM1_pico2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM1_pico2_arm.uf2) |
 
 ### Murmulator M2
 
@@ -258,10 +271,10 @@ For more info about the Murmulator see https://murmulator.ru/.
 
 | Board | Binary |
 |:--|:--|
-| Pico 2 / Pico 2 W | [picoPacPlus_MurmulatorM2_arm.uf2](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM2_arm.uf2) |
+| Pico 2 / Pico 2 W | [picoPacPlus_MurmulatorM2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM2_arm.uf2) |
 
 ### Other downloads
 
-- Metadata: [pacPlusMetadata.zip](https://github.com/fhoedemakers/pico-pacPlus/releases/latest/download/pacPlusMetadata.zip)
+- Metadata: [pacPlusMetadata.zip](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/pacPlusMetadata.zip)
 
 Extract the zip file to the root folder of the SD card. Select a game in the menu and press START to show more information and box art. Works for most official released games. The screensaver shows floating random cover art.
