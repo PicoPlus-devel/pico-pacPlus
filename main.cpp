@@ -87,6 +87,13 @@ const int8_t g_settings_visibility_o2em[MOPT_COUNT] = {
     0,                               // YM Audio (SMS Only)
     1,                               // Enter bootsel mode
     1,                               // Controller Test
+    0,                               // Recent Games (menu.cpp force-shows this in the rom browser)
+    0,                               // USB Drive Mode (menu.cpp force-shows this in the rom browser)
+    0,                               // Cassette (TI-99/4A only)
+    0,                               // Disk (TI-99/4A only)
+    0,                               // Serial keyboard (TI-99/4A only)
+    0,                               // Sprite Limit (NES only)
+    0,                               // Overscan in menu (menu.cpp force-shows this below the menu colors)
 };
 
 const uint8_t g_available_screen_modes_o2em[] = {
