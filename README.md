@@ -50,6 +50,8 @@ The emulator runs on both RP2040 and RP2350 boards:
 
 For board-by-board wiring, supported display modes, PCB designs, 3D-printed cases, and which UF2 file to flash, refer to the [pico-infonesPlus documentation](https://github.com/PicoPlus-devel/pico-infonesPlus#setup). The set of supported boards and their pinouts is identical between the two projects — only the firmware (`.uf2` file) differs.
 
+This includes the [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Raspberry Pi Pico 2, which plays sound through HDMI and its audio jack at the same time; see [Olimex RP2040-PICO-PC](https://github.com/PicoPlus-devel/pico-infonesPlus#olimex-rp2040-pico-pc).
+
 ### PSRAM
 
 Some boards support up to 8 MB of PSRAM. When PSRAM is detected the emulator uses it automatically, giving much faster game startup (no flash-and-reboot step).
@@ -60,6 +62,7 @@ Some boards support up to 8 MB of PSRAM. When PSRAM is detected the emulator use
 | [Adafruit Metro RP2350 with PSRAM](https://www.adafruit.com/product/6267) | Yes — pre-installed |
 | [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2) | Yes — pre-installed |
 | [Adafruit Fruit Jam](https://www.adafruit.com/product/6200) | Yes — pre-installed |
+| [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Pico 2 | No — optional (chip select on GPIO 8) |
 
 ***
 
@@ -287,6 +290,7 @@ Options:
      12: Murmulator M1
      13: Murmulator M2 (RP2350 only)
      14: Adafruit Feather RP2350 with TLV320DAC3100 I2S DAC, SD card breakout and PIO USB
+     15: Olimex RP2040-PICO-PC with a Pico 2 (RP2350 only)
 ```
 
 When using Visual Studio Code, choose the Release or the RelWithDebInfo build variant.
@@ -345,6 +349,7 @@ When using Visual Studio Code, choose the Release or the RelWithDebInfo build va
 - PCB design by [John Edgar Park](https://twitter.com/johnedgarpark).
 - Additional PCB design and 3D-printable case by [Gavin Knight (DynaMight1124)](https://github.com/DynaMight1124).
 - Metadata box art sourced from [odyssey2.info](https://odyssey2.info).
+- Olimex RP2040-PICO-PC support, including sound through its audio jack, by [DnCraptor](https://github.com/DnCraptor).
 
 ### Contributions and assistance
 
