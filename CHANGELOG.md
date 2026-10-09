@@ -17,8 +17,21 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Both RP2040 (Pico 1) and RP2350 (Pico 2 and variants) boards are supported. RP2350 is recommended: a few games show minor visual glitches on RP2040.
 
 > [!NOTE]
-> Upgrading from an earlier version only means flashing the new `.uf2`. The settings file on the SD card is unchanged, so your screen mode, colours and other preferences carry over.
+> Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
+
+# v0.6
+
+After updating, all settings return to their defaults once.
+
+## What's new
+
+- **Olimex RP2040-PICO-PC.** The emulator now runs on the [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Raspberry Pi Pico 2: HDMI, sound through HDMI and the audio jack, a USB controller on the USB-A port and a NES or SNES controller on the UEXT connector. See [Olimex RP2040-PICO-PC](https://github.com/PicoPlus-devel/pico-infonesPlus#olimex-rp2040-pico-pc) in the pico-infonesPlus readme. Contributed by [DnCraptor](https://github.com/DnCraptor).
+
+## Fixes
+
+- **The Controller Test screen is now closed by holding SELECT + UP** for 2 seconds. SELECT + START conflicted with some 8BitDo wireless controllers.
+- **The B button of the AliExpress SNES USB controller works without pressing Y first.**
 
 # v0.5
 
@@ -272,6 +285,14 @@ For more info about the Murmulator see https://murmulator.ru/.
 | Board | Binary |
 |:--|:--|
 | Pico 2 / Pico 2 W | [picoPacPlus_MurmulatorM2_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_MurmulatorM2_arm.uf2) |
+
+### Olimex RP2040-PICO-PC
+
+| Board | Binary |
+|:--|:--|
+| Pico 2 | [picoPacPlus_OlimexPicoPC_arm.uf2](https://github.com/PicoPlus-devel/pico-pacPlus/releases/latest/download/picoPacPlus_OlimexPicoPC_arm.uf2) |
+
+There is no Pico 2 W binary for this board.
 
 ### Other downloads
 
