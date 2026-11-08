@@ -20,6 +20,18 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
 
+# v0.6.3
+
+## Changes
+
+- **NES and SNES controllers on the controller ports are now read with the same timing as a real console**, on all boards. Thanks to @javavi.
+- Under pico-bootLoader, the settings menu entry that goes back to the bootloader is now called **Return to boot loader**.
+
+## Fixes
+
+- **The picture no longer drops out in DVI mode.** On boards with HSTX video, with *Display Mode* set to DVI, the picture could randomly drop out.
+- **No more flickering lines in DVI mode.** On boards with HSTX video, with *Display Mode* set to DVI, now and then a single line was shown shifted to the right for one frame.
+
 # v0.6.2
 
 ## Changes
