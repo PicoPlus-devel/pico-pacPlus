@@ -52,6 +52,10 @@ For board-by-board wiring, supported display modes, and which UF2 file to flash,
 
 This includes the [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Raspberry Pi Pico 2, which plays sound through HDMI and its audio jack at the same time; see [Olimex RP2040-PICO-PC](https://github.com/PicoPlus-devel/pico-infonesPlus#olimex-rp2040-pico-pc).
 
+The [Pico Computer 3](https://github.com/UKTailwind/Pico-Computer-3) is supported as well. It has PSRAM on the board, and up to two NES or SNES controllers and a Wii Classic controller connect to its I/O header; see [Pico Computer 3](https://github.com/PicoPlus-devel/pico-infonesPlus#pico-computer-3). Support for this board is new, and its pin assignment may still change.
+
+The [PCB for the Waveshare RP2350-PiZero](https://github.com/PicoPlus-devel/pico-infonesPlus#pcb-with-waveshare-rp2350-pizero), designed by Liu Szuping ([szuping](https://github.com/szuping)), is supported as well. Video goes through the HDMI port of the PCB, and sound through HDMI, or through the audio jack with *External Audio* in the settings menu. Up to two NES or SNES controllers connect to the controller ports of the PCB, or Bluetooth controllers through an ESP32 module running [BlueRetro](https://github.com/darthcloud/blueretro) in its socket. PSRAM is optional and has to be soldered onto the RP2350-PiZero. The PCB design is not yet available.
+
 ### PSRAM
 
 Some boards support up to 8 MB of PSRAM. When PSRAM is detected the emulator uses it automatically, giving much faster game startup (no flash-and-reboot step).
@@ -63,6 +67,8 @@ Some boards support up to 8 MB of PSRAM. When PSRAM is detected the emulator use
 | [Pimoroni Pico Plus 2](https://shop.pimoroni.com/products/pimoroni-pico-plus-2) | Yes — pre-installed |
 | [Adafruit Fruit Jam](https://www.adafruit.com/product/6200) | Yes — pre-installed |
 | [Olimex RP2040-PICO-PC](https://www.olimex.com/Products/MicroPython/PICO/RP2040-PICO-PC/) with a Pico 2 | No — optional (chip select on GPIO 8) |
+| [Pico Computer 3](https://github.com/UKTailwind/Pico-Computer-3) | Yes — pre-installed |
+| [PCB for the Waveshare RP2350-PiZero](https://github.com/PicoPlus-devel/pico-infonesPlus#pcb-with-waveshare-rp2350-pizero) | No — optional, must be soldered onto the RP2350-PiZero |
 
 ***
 
@@ -79,6 +85,8 @@ Four community PCB designs turn a supported board and its breakouts into a small
 
 > [!NOTE]
 > The PicoNES v2.6 and v2.8 are shown with a Pimoroni Pico Plus 2. A Raspberry Pi Pico, Pico W, Pico 2 or Pico 2 W can also be fitted.
+
+A fifth design, the [PCB for the Waveshare RP2350-PiZero](https://github.com/PicoPlus-devel/pico-infonesPlus#pcb-with-waveshare-rp2350-pizero) by Liu Szuping, is supported by the emulator, but the design is not yet available.
 
 > [!NOTE]
 > Sellers on AliExpress have copied the PicoNES design and sell ready-made boards. For questions about those, contact the seller.
@@ -183,7 +191,7 @@ The emulator presents the Odyssey 2 joystick + keyboard mapping on any connected
 ### Legacy controllers
 
 - One or two original NES controllers. In some configurations, soldering is required.
-- Wii Classic Controller: supported on Adafruit Feather RP2040, WaveShare RP2040/RP2350-PiZero, Adafruit Metro RP2350, and Adafruit Fruit Jam boards.
+- Wii Classic Controller: supported on Adafruit Feather RP2040, WaveShare RP2040/RP2350-PiZero, Adafruit Metro RP2350, Adafruit Fruit Jam and Pico Computer 3 boards.
 
 ### Button mapping
 
@@ -310,7 +318,7 @@ Alongside pico-pacPlus, the bootloader can run the NES, SNES, Game Boy / Game Bo
 > [!NOTE]
 > pico-bootLoader requires an **RP2350** board; RP2040 boards are not supported, because the flash layout and UF2 checks are RP2350-specific. See the bootloader's own readme for the current list of supported boards and for the SD card layout.
 
-When the emulator runs under the bootloader, the settings menu gains an extra **Return to emulator selection** entry that takes you back to the picker.
+When the emulator runs under the bootloader, the settings menu gains an extra **Return to boot loader** entry that takes you back to the picker.
 
 Each emulator installed under the bootloader keeps its own settings file and its own [recently played list](#recently-played-games), so they never overwrite each other's.
 
@@ -368,6 +376,8 @@ Options:
      13: Murmulator M2 (RP2350 only)
      14: Adafruit Feather RP2350 with TLV320DAC3100 I2S DAC, SD card breakout and PIO USB
      15: Olimex RP2040-PICO-PC with a Pico 2 (RP2350 only)
+     17: Pico Computer 3 (PC3): HSTX video, I2S audio, USB hub (RP2350 only)
+     18: Waveshare RP2350-PiZero on a PCB designed by Liu Szuping: HSTX video, I2S audio, BlueRetro - PIO USB enabled, -u implied.
 ```
 
 When using Visual Studio Code, choose the Release or the RelWithDebInfo build variant.
@@ -402,7 +412,7 @@ When using Visual Studio Code, choose the Release or the RelWithDebInfo build va
 - [O2EM](https://sourceforge.net/projects/o2em/) — original Odyssey 2 emulator by [Daniel Boris](https://sourceforge.net/projects/o2em/), continued by [Andre de la Rocha](https://sourceforge.net/projects/o2em/).
 - [O2EM2](https://music.mzis.net/bin/o2em2/) — enhanced O2EM fork by [LABBE Corentin](https://music.mzis.net/).
 - [pico-infonesPlus](https://github.com/PicoPlus-devel/pico-infonesPlus) — shared video, audio, menu, and SD card infrastructure, by Frank Hoedemakers.
-- Pico port, SD card support, menu system, and platform integration by [@frenskefrens](https://github.com/fhoedemakers).
+- Pico port, SD card support, menu system, and platform integration by [@fhoedemakers](https://github.com/fhoedemakers).
 
 ### Video and display
 
@@ -427,6 +437,8 @@ When using Visual Studio Code, choose the Release or the RelWithDebInfo build va
 - Additional PCB design and 3D-printable case by [Gavin Knight (DynaMight1124)](https://github.com/DynaMight1124).
 - Metadata box art sourced from [odyssey2.info](https://odyssey2.info).
 - Olimex RP2040-PICO-PC support, including sound through its audio jack, by [DnCraptor](https://github.com/DnCraptor).
+- Pico Computer 3 support by [javavi](https://github.com/javavi).
+- PCB design for the Waveshare RP2350-PiZero by Liu Szuping ([szuping](https://github.com/szuping)).
 
 ### Contributions and assistance
 
