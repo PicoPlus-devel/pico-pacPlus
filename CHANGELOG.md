@@ -20,6 +20,12 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
 
+# Next release
+
+## Changes
+
+- Built with Pico SDK 2.3.1. This leaves a little more memory free, about 0.4 KB.
+
 # v0.7
 
 ## What's new
