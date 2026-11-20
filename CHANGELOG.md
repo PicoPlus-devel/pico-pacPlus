@@ -22,6 +22,10 @@ Release notes are below, newest first. [Binaries for every board configuration a
 
 # Next release
 
+## What's new
+
+- **Attract mode.** pico-bootLoader's new attract mode can now start the emulator with a random cartridge from `/roms/O2E`. Attract mode answers the cartridge's *SELECT GAME* prompt. Press any button to play that game yourself.
+
 ## Changes
 
 - Built with Pico SDK 2.3.1. This leaves a little more memory free, about 0.4 KB.
