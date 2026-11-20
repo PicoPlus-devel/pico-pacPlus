@@ -20,7 +20,9 @@ Release notes are below, newest first. [Binaries for every board configuration a
 > Upgrading from an earlier version only means flashing the new `.uf2`. When updating to v0.6 the settings return to their defaults once; after that your screen mode, colours and other preferences carry over again.
 
 
-# Next release
+# v0.7_bl
+
+This version is built for [pico-bootLoader](https://github.com/PicoPlus-devel/pico-bootLoader) only, and is included in its SD-card archive. It has no release of its own: without pico-bootLoader, keep using v0.7.
 
 ## What's new
 
