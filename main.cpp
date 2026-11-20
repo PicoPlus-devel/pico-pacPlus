@@ -12,6 +12,9 @@
 #include "nespad.h"
 #include "wiipad.h"
 #include "FrensHelpers.h"
+// pico-bootLoader attract mode may start this application with a random game from here
+// (bootloader builds only, see pico_shared/attract.h).
+FRENS_ATTRACT_DIRS("/roms/O2E");
 #include "recentgames.h"
 #include "settings.h"
 #include "FrensFonts.h"
@@ -609,6 +612,29 @@ static int hidKeyToO2Key(uint8_t hid)
     }
 }
 
+#if FRENS_ATTRACT_APP
+// Attract mode: most cartridges come up on "SELECT GAME" and wait for a number.
+// START types a 1 (below), so press it once, as a player would, 2.5 s after the
+// cartridge started. Timed from the first poll, however often the core polls.
+static bool attractPressStart()
+{
+    static uint64_t start = 0;
+    static bool logged = false;
+    if (!Frens::attractActive())
+        return false;
+    const uint64_t now = time_us_64();
+    if (!start)
+        start = now;
+    const bool press = now - start >= 2500000 && now - start < 2700000;
+    if (press && !logged)
+    {
+        logged = true;
+        printf("Attract mode: START (key 1) for SELECT GAME\n");
+    }
+    return press;
+}
+#endif
+
 extern "C" void o2em_poll_input()
 {
     static constexpr int LEFT = 1 << 6;
@@ -629,6 +655,10 @@ extern "C" void o2em_poll_input()
         if (o2key >= 0 && o2key < KEY_MAX)
             key[o2key] = 1;
     }
+#if FRENS_ATTRACT_APP
+    if (attractPressStart())
+        key[KEY_1] = 1;
+#endif
 
 #if NES_PIN_CLK != -1
     // Buttons of a GPIO pad in NES order. A NES pad shifts them out that way
